@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متاهة السطور | نظام الحماية المتطور</title>
+    <title>متاهة السطور | الحماية الاحترافية والقراءة الذكية</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -12,72 +12,72 @@
             --corporate-blue: #1a2a6c;
             --corporate-gradient: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             --gold: #d4af37;
-            --error: #e74c3c;
             --text-dark: #1e272e;
+            --error: #e74c3c;
             --shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
 
-        body { font-family: 'Cairo', sans-serif; background: #e0e5ec; margin: 0; padding: 0; color: var(--text-dark); overflow-x: hidden; }
+        body { font-family: 'Cairo', sans-serif; background: #eef2f3; margin: 0; padding: 0; color: var(--text-dark); overflow-x: hidden; }
 
         /* شاشة الحظر */
         #ban-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 10000; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-        .ban-content { border: 4px solid var(--error); padding: 40px; border-radius: 20px; background: #fff5f5; max-width: 80%; }
+        .ban-box { border: 5px solid var(--error); padding: 40px; border-radius: 20px; background: #fff5f5; max-width: 80%; }
 
-        header { background: #fff; padding: 25px; text-align: center; border-bottom: 5px solid var(--corporate-blue); box-shadow: var(--shadow); }
-        header h1 { font-size: 2.5rem; font-family: 'Reem Kufi', sans-serif; margin: 0; background: var(--corporate-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        header { background: #fff; padding: 30px 20px; text-align: center; border-bottom: 5px solid var(--corporate-blue); box-shadow: var(--shadow); }
+        header h1 { font-size: 2.8rem; font-family: 'Reem Kufi', sans-serif; margin: 0; background: var(--corporate-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        #userBar { background: #1e272e; color: white; padding: 10px 25px; display: flex; justify-content: space-between; align-items: center; }
+        #userBar { background: #1e272e; color: white; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; }
         
         .library-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 30px; max-width: 1200px; margin: 40px auto; padding: 20px; }
 
-        /* تصميم الكتاب الخارجي الاحترافي */
+        /* غلاف الكتاب الخارجي */
         .book-item { perspective: 1000px; cursor: pointer; }
         .book-card {
-            width: 170px; height: 250px; background: var(--corporate-blue); border-radius: 4px 15px 15px 4px;
+            width: 170px; height: 250px; background: var(--corporate-blue); border-radius: 3px 15px 15px 3px; position: relative;
             transform-style: preserve-3d; transition: 0.6s; box-shadow: 10px 10px 25px rgba(0,0,0,0.4);
-            display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 10px; color: white;
-            border-left: 10px solid rgba(0,0,0,0.3); position: relative;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 15px; color: white;
+            border-left: 10px solid rgba(0,0,0,0.5);
         }
-        .book-card h3 { font-family: 'Amiri', serif; font-size: 1.2rem; text-align: center; padding: 0 10px; }
-        .book-item:hover .book-card { transform: rotateY(-25deg); }
+        .book-card h3 { font-family: 'Amiri', serif; font-size: 1.2rem; text-align: center; }
+        .book-item:hover .book-card { transform: rotateY(-30deg); }
 
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; overflow-y: auto; }
-        .form-container { background: white; max-width: 600px; margin: 30px auto; padding: 30px; border-radius: 15px; border-top: 10px solid var(--corporate-blue); }
+        .form-container { background: white; max-width: 550px; margin: 30px auto; padding: 35px; border-radius: 15px; border-top: 10px solid var(--corporate-blue); }
         
-        input, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Cairo'; box-sizing: border-box; }
+        input, textarea { width: 100%; padding: 12px; margin-bottom: 12px; border: 2px solid #eee; border-radius: 8px; font-family: 'Cairo'; box-sizing: border-box; }
         .btn-action { background: var(--corporate-gradient); color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        
+        /* عداد الكلمات */
+        .counter { font-size: 11px; margin-top: -10px; margin-bottom: 10px; font-weight: bold; }
+        .limit-error { border-color: var(--error) !important; background: #fff0f0; color: var(--error); }
 
-        /* نظام القارئ - كتاب حقيقي */
+        /* تصميم الكتاب الحقيقي (الداخلي) */
         .reader-container { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; touch-action: none; }
-        .book-viewport { width: 95%; max-width: 450px; height: 85vh; background: var(--paper); box-shadow: 0 0 50px rgba(0,0,0,0.6); border-radius: 5px; position: relative; overflow: hidden; }
+        .book-viewport { width: 95%; max-width: 450px; height: 85vh; background: var(--paper); box-shadow: 0 0 50px rgba(0,0,0,0.7); border-radius: 5px; position: relative; overflow: hidden; }
         
-        .book-page { position: absolute; width: 100%; height: 100%; padding: 40px; box-sizing: border-box; background: var(--paper); display: none; flex-direction: column; transition: transform 0.4s ease-in-out; }
-        .book-page.active { display: flex; animation: pageFlip 0.5s ease-out; }
+        .page { position: absolute; width: 100%; height: 100%; padding: 40px; box-sizing: border-box; background: var(--paper); display: none; flex-direction: column; }
+        .page.active { display: flex; animation: flipAnim 0.4s ease-out; }
         
-        @keyframes pageFlip { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes flipAnim { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
-        .page-text { font-family: 'Amiri', serif; font-size: 1.4rem; line-height: 2.1; text-align: justify; flex-grow: 1; color: #2c3e50; }
-        .page-num { text-align: center; font-size: 12px; color: #777; border-top: 1px solid #ddd; padding-top: 10px; }
+        .page-content { font-family: 'Amiri', serif; font-size: 1.4rem; line-height: 2; text-align: justify; flex-grow: 1; color: #2c3e50; }
+        .page-footer { text-align: center; font-size: 12px; color: #777; border-top: 1px solid #ddd; padding-top: 10px; }
 
-        /* العدادات */
-        .counter-box { font-size: 12px; margin-bottom: 5px; font-weight: bold; }
-        .text-error { border: 2.5px solid var(--error) !important; color: var(--error); background: #fff0f0; }
-
-        .publish-fixed { position: fixed; bottom: 30px; left: 30px; background: var(--corporate-gradient); color: white; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; z-index: 100; box-shadow: var(--shadow); }
-        #logoutBtn { background: var(--error); color: white; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; }
+        .publish-fixed { position: fixed; bottom: 30px; left: 30px; background: var(--corporate-gradient); color: white; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; box-shadow: var(--shadow); z-index: 100; }
+        #logoutBtn { background: var(--error); color: white; border: none; padding: 5px 12px; border-radius: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
 
     <div id="ban-screen">
-        <div class="ban-content">
+        <div class="ban-box">
             <h1 style="color:var(--error); font-size: 2.5rem;">⚠️ تم حظر حسابك نهائياً</h1>
-            <p id="ban-reason-text" style="font-size: 1.1rem; color: #444; font-weight: bold;"></p>
-            <p>تم رصد محاولة تجاوز سياسات المنصة (تعدد الحسابات). بياناتك مُدرجة الآن في القائمة السوداء.</p>
+            <p id="ban-reason-msg" style="font-weight: bold;"></p>
+            <p>لقد رصد النظام محاولة تعدد حسابات من نفس الجهاز أو الشبكة. تم إدراج بياناتك في القائمة السوداء.</p>
         </div>
     </div>
 
-    <div id="userBar"><span>فحص البصمة الأمنية...</span></div>
+    <div id="userBar"><span>جاري التحقق من الهوية الرقمية...</span></div>
 
     <header>
         <h1>متاهة السطور</h1>
@@ -102,8 +102,8 @@
                 <input type="email" id="l-email" placeholder="البريد الإلكتروني">
                 <input type="password" id="l-pass" placeholder="كلمة المرور">
             </div>
-            <button class="btn-action" id="main-auth-btn">تأكيد العملية</button>
-            <p id="toggle-auth" style="text-align:center; cursor:pointer; color:blue; margin-top:15px;">لديك حساب؟ سجل دخول</p>
+            <button class="btn-action" id="main-auth-btn">تأكيد</button>
+            <p id="toggle-auth" style="text-align:center; cursor:pointer; color:blue;">لديك حساب؟ سجل دخول</p>
             <p onclick="closeModal('auth-modal')" style="text-align:center; color:red; cursor:pointer;">إلغاء</p>
         </div>
     </div>
@@ -112,9 +112,9 @@
         <div class="form-container">
             <h2>نشر عمل جديد</h2>
             <input type="text" id="p-title" placeholder="عنوان الكتاب">
-            <div id="desc-counter" class="counter-box">الوصف (أكثر من 20 كلمة):</div>
-            <textarea id="p-desc" placeholder="وصف الكتاب..." rows="3"></textarea>
-            <div id="content-counter" class="counter-box">المحتوى (أقل من 20,000 كلمة):</div>
+            <div id="desc-count" class="counter">الوصف (يجب أن يكون أكثر من 20 كلمة)</div>
+            <textarea id="p-desc" placeholder="وصف الكتاب..." rows="2"></textarea>
+            <div id="content-count" class="counter">المحتوى (بحد أقصى 20,000 كلمة)</div>
             <textarea id="p-content" placeholder="محتوى الكتاب..." rows="10"></textarea>
             <button class="btn-action" id="submit-story-btn">إرسال للمراجعة</button>
             <p onclick="closeModal('publish-modal')" style="text-align:center; cursor:pointer;">إغلاق</p>
@@ -122,9 +122,9 @@
     </div>
 
     <div id="reader-modal" class="modal">
-        <div class="reader-container" id="swipe-area">
+        <div class="reader-container" id="book-swipe-area">
             <button onclick="closeModal('reader-modal')" style="position:fixed; top:20px; right:20px; z-index:3000; background:var(--error); color:white; border:none; border-radius:50%; width:40px; height:40px; cursor:pointer;">X</button>
-            <div class="book-viewport" id="book-pages-container"></div>
+            <div class="book-viewport" id="book-renderer"></div>
         </div>
     </div>
 
@@ -149,31 +149,34 @@
         let currentUserData = null;
         let isLogin = false;
         let bookPages = [];
-        let currentPageIndex = 0;
+        let currentPage = 0;
 
-        // وظيفة جلب الهوية (الجهاز + الروتر)
-        async function getFingerprint() {
+        // دالة سحب الهوية المزدوجة (جهاز + روتر)
+        async function getDigitalSignature() {
             try {
                 const res = await fetch('https://api.ipify.org?format=json');
                 const data = await res.json();
-                let dId = localStorage.getItem('maze_secure_id');
+                let dId = localStorage.getItem('maze_secure_fingerprint');
                 if(!dId) {
-                    dId = 'DEVICE-' + Math.random().toString(36).substr(2, 10).toUpperCase();
-                    localStorage.setItem('maze_secure_id', dId);
+                    dId = 'FGP-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+                    localStorage.setItem('maze_secure_fingerprint', dId);
                 }
                 return { ip: data.ip, device: dId };
             } catch (e) { return { ip: '0.0.0.0', device: 'UNKNOWN' }; }
         }
 
-        // الحظر الفوري وإضافة للقائمة السوداء
-        async function applyBan(uid, reason) {
+        // دالة الحظر التلقائي والنقل للقائمة السوداء
+        async function triggerBan(uid, reason) {
+            const signature = await getDigitalSignature();
             await updateDoc(doc(db, "users", uid), {
                 status: "banned",
                 blocked: true,
                 banReason: reason,
-                blacklistDate: serverTimestamp()
+                blacklistedAt: serverTimestamp()
             });
-            document.getElementById('ban-reason-text').innerText = "سبب الحظر: " + reason;
+            // محاكاة إرسال بريد
+            console.log("Sending email to user: Your account has been banned due to " + reason);
+            document.getElementById('ban-reason-msg').innerText = "السبب: " + reason;
             document.getElementById('ban-screen').style.display = 'flex';
         }
 
@@ -187,7 +190,7 @@
                 const s = await getDoc(doc(db, "users", user.uid));
                 currentUserData = s.data();
                 if(!currentUserData || currentUserData.blocked) {
-                    document.getElementById('ban-reason-text').innerText = "سبب الحظر: " + (currentUserData?.banReason || "تعدد حسابات");
+                    document.getElementById('ban-reason-msg').innerText = "السبب: " + (currentUserData?.banReason || "تعدد حسابات");
                     document.getElementById('ban-screen').style.display = 'flex';
                     signOut(auth);
                     return;
@@ -199,16 +202,16 @@
         });
 
         document.getElementById('main-auth-btn').onclick = async () => {
-            const fingerprint = await getFingerprint();
+            const sig = await getDigitalSignature();
             
-            // البحث عن أي حساب مرتبط بنفس الجهاز أو الروتر
-            const qDev = query(collection(db, "users"), where("deviceId", "==", fingerprint.device));
-            const qIP = query(collection(db, "users"), where("routerIp", "==", fingerprint.ip));
-            const [snapDev, snapIP] = await Promise.all([getDocs(qDev), getDocs(qIP)]);
+            // فحص وجود الحساب في القائمة السوداء (بصمة الجهاز أو الروتر)
+            const qIP = query(collection(db, "users"), where("routerIp", "==", sig.ip));
+            const qDev = query(collection(db, "users"), where("deviceId", "==", sig.device));
+            const [snapIP, snapDev] = await Promise.all([getDocs(qIP), getDocs(qDev)]);
 
             let suspects = [];
-            snapDev.forEach(d => suspects.push({id: d.id, data: d.data()}));
-            snapIP.forEach(d => { if(!suspects.find(x => x.id === d.id)) suspects.push({id: d.id, data: d.data()}); });
+            snapIP.forEach(d => suspects.push({id: d.id, data: d.data()}));
+            snapDev.forEach(d => { if(!suspects.find(x => x.id === d.id)) suspects.push({id: d.id, data: d.data()}); });
 
             if(isLogin) {
                 const email = document.getElementById('l-email').value;
@@ -217,19 +220,17 @@
                     const cred = await signInWithEmailAndPassword(auth, email, pass);
                     // إذا دخل بحساب مختلف على نفس البصمة
                     if(suspects.length > 0 && !suspects.find(x => x.id === cred.user.uid)) {
-                        const reason = "محاولة تسجيل دخول بحساب جديد على شبكة/جهاز مسجل به حساب آخر مسبقاً.";
-                        suspects.forEach(s => applyBan(s.id, reason));
-                        await applyBan(cred.user.uid, reason);
+                        suspects.forEach(s => triggerBan(s.id, "رصد تعدد حسابات على نفس الشبكة/الجهاز"));
+                        await triggerBan(cred.user.uid, "رصد تعدد حسابات على نفس الشبكة/الجهاز");
                         return;
                     }
                     location.reload();
-                } catch(e) { alert("خطأ في البيانات"); }
+                } catch(e) { alert("بيانات خاطئة"); }
             } else {
-                // إذا حاول إنشاء حساب جديد والبصمة موجودة
+                // عند إنشاء حساب جديد
                 if(suspects.length > 0) {
-                    const reason = "محاولة إنشاء حساب جديد على بصمة (جهاز/روتر) مسجلة مسبقاً.";
-                    suspects.forEach(s => applyBan(s.id, reason));
-                    alert("⚠️ تم اكتشاف نشاط مخالف. تم حظر الحسابات المرتبطة بهذه البصمة.");
+                    suspects.forEach(s => triggerBan(s.id, "محاولة إنشاء حساب جديد من جهاز/شبكة محظورة"));
+                    alert("⚠️ تحذير: هذا الجهاز/الشبكة مسجل بها حساب بالفعل. سيتم حظر الجميع.");
                     return;
                 }
                 const name = document.getElementById('r-fullname').value;
@@ -242,87 +243,89 @@
                     const cred = await createUserWithEmailAndPassword(auth, email, pass);
                     await setDoc(doc(db, "users", cred.user.uid), {
                         fullName: name, username: user, email, birthDate: birth,
-                        deviceId: fingerprint.device, routerIp: fingerprint.ip,
-                        status: "pending", blocked: false, createdAt: serverTimestamp()
+                        deviceId: sig.device, routerIp: sig.ip, status: "pending", blocked: false, createdAt: serverTimestamp()
                     });
                     location.reload();
                 } catch(e) { alert(e.message); }
             }
         };
 
-        // عدادات النشر والتحقق من الشروط
+        // عدادات الكلمات
         document.getElementById('p-desc').oninput = function() {
-            const count = this.value.trim().split(/\s+/).filter(x => x).length;
-            document.getElementById('desc-counter').innerText = `الوصف: ${count}/20 كلمة`;
-            this.classList.toggle('text-error', count < 20);
+            const words = this.value.trim().split(/\s+/).filter(w => w).length;
+            document.getElementById('desc-count').innerText = `الوصف: ${words}/20 كلمة`;
+            this.classList.toggle('limit-error', words < 20);
         };
 
         document.getElementById('p-content').oninput = function() {
-            const count = this.value.trim().split(/\s+/).filter(x => x).length;
-            document.getElementById('content-counter').innerText = `المحتوى: ${count.toLocaleString()}/20,000 كلمة`;
-            this.classList.toggle('text-error', count > 20000);
+            const words = this.value.trim().split(/\s+/).filter(w => w).length;
+            document.getElementById('content-count').innerText = `المحتوى: ${words.toLocaleString()}/20,000 كلمة`;
+            this.classList.toggle('limit-error', words > 20000);
         };
 
         document.getElementById('submit-story-btn').onclick = async () => {
             const title = document.getElementById('p-title').value;
             const desc = document.getElementById('p-desc').value;
             const content = document.getElementById('p-content').value;
-            if(desc.trim().split(/\s+/).length < 20) return alert("الوصف قصير جداً!");
-            if(content.trim().split(/\s+/).length > 20000) return alert("المحتوى تجاوز الحد المسموح!");
+            if(desc.split(/\s+/).length < 20 || content.split(/\s+/).length > 20000) return alert("يرجى الالتزام بحدود الكلمات!");
 
             await addDoc(collection(db, "stories"), {
                 title, desc, content, author: currentUserData.fullName,
                 authorId: auth.currentUser.uid, authorBirth: currentUserData.birthDate,
                 status: "pending", createdAt: serverTimestamp()
             });
-            alert("تم الإرسال لعلي السيد بنجاح!");
+            alert("تم الإرسال لعلي السيد! سيظهر فور الموافقة.");
             closeModal('publish-modal');
         };
 
-        // نظام تقليب الصفحات 3D
-        function initBook(story) {
+        // وظائف تقليب الكتاب
+        function openBook(story) {
             const words = story.content.split(/\s+/);
             bookPages = [];
-            // صفحة 1: الغلاف الداخلي
+            
+            // صفحة الغلاف (Index 0)
             bookPages.push(`
-                <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100%; text-align:center; border:2px double var(--gold); padding:20px;">
-                    <h1 style="font-size:2.8rem; color:var(--corporate-blue); margin-bottom:10px;">${story.title}</h1>
-                    <h2 style="color:var(--gold);">بقلم: ${story.author}</h2>
-                    <hr style="width:60%; margin:20px 0;">
-                    <p style="font-style:italic; line-height:1.6;">${story.desc}</p>
-                    <p style="margin-top:30px; font-size:12px; color:gray;">تاريخ ميلاد الكاتب: ${story.authorBirth}</p>
+                <div style="text-align:center; padding-top:20%; border:3px double var(--gold); height:85%;">
+                    <h1 style="font-size:2.5rem; color:var(--corporate-blue);">${story.title}</h1>
+                    <hr style="width:50%">
+                    <h3>بقلم: ${story.author}</h3>
+                    <p style="margin-top:40px; font-style:italic; color:#555;">${story.desc}</p>
+                    <p style="position:absolute; bottom:50px; left:0; right:0; font-size:12px;">تاريخ الميلاد: ${story.authorBirth}</p>
                 </div>
             `);
-            // تقسيم النص (200 كلمة لكل صفحة)
+
+            // تقسيم المحتوى (200 كلمة لكل صفحة)
             for (let i = 0; i < words.length; i += 200) {
-                bookPages.push(`<div class="page-text">${words.slice(i, i + 200).join(" ")}</div>`);
+                bookPages.push(`<div class="page-content">${words.slice(i, i + 200).join(" ")}</div>`);
             }
-            renderPage(0);
+            
+            currentPage = 0;
+            renderBookPage();
+            openModal('reader-modal');
         }
 
-        function renderPage(index) {
-            const container = document.getElementById('book-pages-container');
+        function renderBookPage() {
+            const container = document.getElementById('book-renderer');
             container.innerHTML = `
-                <div class="book-page active">
-                    ${bookPages[index]}
-                    <div class="page-num">صفحة ${index + 1} من ${bookPages.length}</div>
-                </div>`;
-            currentPageIndex = index;
+                <div class="page active">
+                    ${bookPages[currentPage]}
+                    <div class="page-footer">صفحة ${currentPage + 1} من ${bookPages.length}</div>
+                </div>
+            `;
         }
 
-        // معالجة السحب (Swipe)
-        let startX = 0;
-        document.getElementById('swipe-area').addEventListener('touchstart', e => startX = e.touches[0].clientX);
-        document.getElementById('swipe-area').addEventListener('touchend', e => {
-            const endX = e.changedTouches[0].clientX;
-            if (startX - endX > 60) flip(1); // لليسار -> التالي
-            if (endX - startX > 60) flip(-1); // لليمين -> السابق
+        // السحب للتقليب
+        let touchStartX = 0;
+        document.getElementById('book-swipe-area').addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
+        document.getElementById('book-swipe-area').addEventListener('touchend', e => {
+            const touchEndX = e.changedTouches[0].clientX;
+            if (touchStartX - touchEndX > 50) { // سحب لليسار (التالي)
+                if(currentPage < bookPages.length - 1) { currentPage++; renderBookPage(); }
+            }
+            if (touchEndX - touchStartX > 50) { // سحب لليمن (السابق)
+                if(currentPage > 0) { currentPage--; renderBookPage(); }
+            }
         });
-
-        function flip(dir) {
-            const next = currentPageIndex + dir;
-            if(next >= 0 && next < bookPages.length) renderPage(next);
-        }
 
         async function loadLibrary() {
             const grid = document.getElementById('library');
@@ -334,14 +337,14 @@
                 const item = document.createElement('div');
                 item.className = 'book-item';
                 item.innerHTML = `<div class="book-card"><h3>${s.title}</h3></div>`;
-                item.onclick = () => { initBook(s); openModal('reader-modal'); };
+                item.onclick = () => openBook(s);
                 grid.appendChild(item);
             });
         }
 
         window.openModal = (id) => document.getElementById(id).style.display = 'block';
         window.closeModal = (id) => document.getElementById(id).style.display = 'none';
-
+        
         document.getElementById('toggle-auth').onclick = () => {
             isLogin = !isLogin;
             document.getElementById('log-fields').style.display = isLogin ? 'block' : 'none';
@@ -352,12 +355,12 @@
         document.getElementById('publishBtn').onclick = () => {
             if(!auth.currentUser) return openModal('auth-modal');
             if(currentUserData.status === 'active') openModal('publish-modal');
-            else alert("حسابك قيد المراجعة حالياً من قبل الإدارة.");
+            else alert("حسابك قيد المراجعة حالياً.");
         };
 
         loadLibrary();
-        // حفظ البصمة تلقائياً عند الدخول (بدون حظر إذا لم يكن هناك مخالفة)
-        getFingerprint().then(f => console.log("Secure Session Started:", f.device));
+        // سحب البصمة تلقائياً عند فتح الموقع
+        getDigitalSignature();
     </script>
 </body>
 </html>
