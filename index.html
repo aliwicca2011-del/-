@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متاهة السطور | الحماية الفائقة</title>
+    <title>متاهة السطور | نظام الحماية المتطور</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&family=Reem+Kufi:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -30,7 +30,7 @@
         
         .library-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 30px; max-width: 1200px; margin: 40px auto; padding: 20px; }
 
-        /* تصميم الكتاب الخارجي */
+        /* تصميم الكتاب الخارجي الاحترافي */
         .book-item { perspective: 1000px; cursor: pointer; }
         .book-card {
             width: 170px; height: 250px; background: var(--corporate-blue); border-radius: 4px 15px 15px 4px;
@@ -47,21 +47,21 @@
         input, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Cairo'; box-sizing: border-box; }
         .btn-action { background: var(--corporate-gradient); color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
-        /* نظام القارئ المحاكي للحقيقة */
-        .reader-container { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-        .book-viewport { width: 90%; max-width: 450px; height: 85vh; background: var(--paper); box-shadow: 0 0 50px rgba(0,0,0,0.6); border-radius: 5px; position: relative; overflow: hidden; }
+        /* نظام القارئ - كتاب حقيقي */
+        .reader-container { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; touch-action: none; }
+        .book-viewport { width: 95%; max-width: 450px; height: 85vh; background: var(--paper); box-shadow: 0 0 50px rgba(0,0,0,0.6); border-radius: 5px; position: relative; overflow: hidden; }
         
-        .book-page { position: absolute; width: 100%; height: 100%; padding: 40px; box-sizing: border-box; background: var(--paper); display: none; flex-direction: column; transition: transform 0.5s ease; }
-        .book-page.active { display: flex; animation: pageFlip 0.6s ease; }
+        .book-page { position: absolute; width: 100%; height: 100%; padding: 40px; box-sizing: border-box; background: var(--paper); display: none; flex-direction: column; transition: transform 0.4s ease-in-out; }
+        .book-page.active { display: flex; animation: pageFlip 0.5s ease-out; }
         
-        @keyframes pageFlip { from { transform: rotateY(90deg); opacity: 0; } to { transform: rotateY(0deg); opacity: 1; } }
+        @keyframes pageFlip { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
-        .page-text { font-family: 'Amiri', serif; font-size: 1.4rem; line-height: 2.1; text-align: justify; flex-grow: 1; overflow: hidden; }
-        .page-num { text-align: center; font-size: 12px; color: #777; border-top: 1px solid #eee; padding-top: 10px; }
+        .page-text { font-family: 'Amiri', serif; font-size: 1.4rem; line-height: 2.1; text-align: justify; flex-grow: 1; color: #2c3e50; }
+        .page-num { text-align: center; font-size: 12px; color: #777; border-top: 1px solid #ddd; padding-top: 10px; }
 
         /* العدادات */
         .counter-box { font-size: 12px; margin-bottom: 5px; font-weight: bold; }
-        .input-error { border: 2px solid var(--error) !important; color: var(--error); background: #fff0f0; }
+        .text-error { border: 2.5px solid var(--error) !important; color: var(--error); background: #fff0f0; }
 
         .publish-fixed { position: fixed; bottom: 30px; left: 30px; background: var(--corporate-gradient); color: white; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; z-index: 100; box-shadow: var(--shadow); }
         #logoutBtn { background: var(--error); color: white; border: none; padding: 5px 15px; border-radius: 5px; cursor: pointer; }
@@ -72,12 +72,12 @@
     <div id="ban-screen">
         <div class="ban-content">
             <h1 style="color:var(--error); font-size: 2.5rem;">⚠️ تم حظر حسابك نهائياً</h1>
-            <p id="ban-reason-text" style="font-size: 1.1rem; color: #444;"></p>
-            <p>تم إدراج بيانات جهازك وشبكتك في القائمة السوداء للمنصة.</p>
+            <p id="ban-reason-text" style="font-size: 1.1rem; color: #444; font-weight: bold;"></p>
+            <p>تم رصد محاولة تجاوز سياسات المنصة (تعدد الحسابات). بياناتك مُدرجة الآن في القائمة السوداء.</p>
         </div>
     </div>
 
-    <div id="userBar"><span>جاري التحقق من أمان الشبكة...</span></div>
+    <div id="userBar"><span>فحص البصمة الأمنية...</span></div>
 
     <header>
         <h1>متاهة السطور</h1>
@@ -102,7 +102,7 @@
                 <input type="email" id="l-email" placeholder="البريد الإلكتروني">
                 <input type="password" id="l-pass" placeholder="كلمة المرور">
             </div>
-            <button class="btn-action" id="main-auth-btn">تأكيد</button>
+            <button class="btn-action" id="main-auth-btn">تأكيد العملية</button>
             <p id="toggle-auth" style="text-align:center; cursor:pointer; color:blue; margin-top:15px;">لديك حساب؟ سجل دخول</p>
             <p onclick="closeModal('auth-modal')" style="text-align:center; color:red; cursor:pointer;">إلغاء</p>
         </div>
@@ -111,7 +111,7 @@
     <div id="publish-modal" class="modal">
         <div class="form-container">
             <h2>نشر عمل جديد</h2>
-            <input type="text" id="p-title" placeholder="اسم الكتاب">
+            <input type="text" id="p-title" placeholder="عنوان الكتاب">
             <div id="desc-counter" class="counter-box">الوصف (أكثر من 20 كلمة):</div>
             <textarea id="p-desc" placeholder="وصف الكتاب..." rows="3"></textarea>
             <div id="content-counter" class="counter-box">المحتوى (أقل من 20,000 كلمة):</div>
@@ -124,8 +124,7 @@
     <div id="reader-modal" class="modal">
         <div class="reader-container" id="swipe-area">
             <button onclick="closeModal('reader-modal')" style="position:fixed; top:20px; right:20px; z-index:3000; background:var(--error); color:white; border:none; border-radius:50%; width:40px; height:40px; cursor:pointer;">X</button>
-            <div class="book-viewport" id="book-pages-container">
-                </div>
+            <div class="book-viewport" id="book-pages-container"></div>
         </div>
     </div>
 
@@ -152,27 +151,29 @@
         let bookPages = [];
         let currentPageIndex = 0;
 
-        // نظام البصمة
-        async function getSecIdentity() {
-            const res = await fetch('https://api.ipify.org?format=json');
-            const data = await res.json();
-            let dId = localStorage.getItem('maze_secure_v4');
-            if(!dId) {
-                dId = 'DEVICE-' + Math.random().toString(36).substr(2, 10).toUpperCase();
-                localStorage.setItem('maze_secure_v4', dId);
-            }
-            return { ip: data.ip, device: dId };
+        // وظيفة جلب الهوية (الجهاز + الروتر)
+        async function getFingerprint() {
+            try {
+                const res = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
+                let dId = localStorage.getItem('maze_secure_id');
+                if(!dId) {
+                    dId = 'DEVICE-' + Math.random().toString(36).substr(2, 10).toUpperCase();
+                    localStorage.setItem('maze_secure_id', dId);
+                }
+                return { ip: data.ip, device: dId };
+            } catch (e) { return { ip: '0.0.0.0', device: 'UNKNOWN' }; }
         }
 
-        // الحظر الفوري
-        async function triggerBan(uid, reason) {
+        // الحظر الفوري وإضافة للقائمة السوداء
+        async function applyBan(uid, reason) {
             await updateDoc(doc(db, "users", uid), {
                 status: "banned",
                 blocked: true,
                 banReason: reason,
-                blacklistedAt: serverTimestamp()
+                blacklistDate: serverTimestamp()
             });
-            document.getElementById('ban-reason-text').innerText = "السبب: " + reason;
+            document.getElementById('ban-reason-text').innerText = "سبب الحظر: " + reason;
             document.getElementById('ban-screen').style.display = 'flex';
         }
 
@@ -186,7 +187,7 @@
                 const s = await getDoc(doc(db, "users", user.uid));
                 currentUserData = s.data();
                 if(!currentUserData || currentUserData.blocked) {
-                    document.getElementById('ban-reason-text').innerText = "السبب: " + (currentUserData?.banReason || "تعدد الحسابات");
+                    document.getElementById('ban-reason-text').innerText = "سبب الحظر: " + (currentUserData?.banReason || "تعدد حسابات");
                     document.getElementById('ban-screen').style.display = 'flex';
                     signOut(auth);
                     return;
@@ -198,33 +199,37 @@
         });
 
         document.getElementById('main-auth-btn').onclick = async () => {
-            const sec = await getSecIdentity();
-            const qD = query(collection(db, "users"), where("deviceId", "==", sec.device));
-            const qI = query(collection(db, "users"), where("routerIp", "==", sec.ip));
-            const [snapD, snapI] = await Promise.all([getDocs(qD), getDocs(qI)]);
+            const fingerprint = await getFingerprint();
+            
+            // البحث عن أي حساب مرتبط بنفس الجهاز أو الروتر
+            const qDev = query(collection(db, "users"), where("deviceId", "==", fingerprint.device));
+            const qIP = query(collection(db, "users"), where("routerIp", "==", fingerprint.ip));
+            const [snapDev, snapIP] = await Promise.all([getDocs(qDev), getDocs(qIP)]);
 
             let suspects = [];
-            snapD.forEach(d => suspects.push(d.id));
-            snapI.forEach(d => { if(!suspects.includes(d.id)) suspects.push(d.id); });
+            snapDev.forEach(d => suspects.push({id: d.id, data: d.data()}));
+            snapIP.forEach(d => { if(!suspects.find(x => x.id === d.id)) suspects.push({id: d.id, data: d.data()}); });
 
             if(isLogin) {
                 const email = document.getElementById('l-email').value;
                 const pass = document.getElementById('l-pass').value;
                 try {
                     const cred = await signInWithEmailAndPassword(auth, email, pass);
-                    if(suspects.length > 0 && !suspects.includes(cred.user.uid)) {
-                        const r = "محاولة تسجيل دخول لحساب مختلف على نفس البصمة الموثقة.";
-                        suspects.forEach(id => triggerBan(id, r));
-                        await triggerBan(cred.user.uid, r);
+                    // إذا دخل بحساب مختلف على نفس البصمة
+                    if(suspects.length > 0 && !suspects.find(x => x.id === cred.user.uid)) {
+                        const reason = "محاولة تسجيل دخول بحساب جديد على شبكة/جهاز مسجل به حساب آخر مسبقاً.";
+                        suspects.forEach(s => applyBan(s.id, reason));
+                        await applyBan(cred.user.uid, reason);
                         return;
                     }
                     location.reload();
                 } catch(e) { alert("خطأ في البيانات"); }
             } else {
+                // إذا حاول إنشاء حساب جديد والبصمة موجودة
                 if(suspects.length > 0) {
-                    const r = "محاولة إنشاء حساب جديد من جهاز أو روتر يحتوي على حسابات أخرى.";
-                    suspects.forEach(id => triggerBan(id, r));
-                    alert("تم حظر نشاطك فوراً بسبب تعدد الحسابات.");
+                    const reason = "محاولة إنشاء حساب جديد على بصمة (جهاز/روتر) مسجلة مسبقاً.";
+                    suspects.forEach(s => applyBan(s.id, reason));
+                    alert("⚠️ تم اكتشاف نشاط مخالف. تم حظر الحسابات المرتبطة بهذه البصمة.");
                     return;
                 }
                 const name = document.getElementById('r-fullname').value;
@@ -237,7 +242,7 @@
                     const cred = await createUserWithEmailAndPassword(auth, email, pass);
                     await setDoc(doc(db, "users", cred.user.uid), {
                         fullName: name, username: user, email, birthDate: birth,
-                        deviceId: sec.device, routerIp: sec.ip,
+                        deviceId: fingerprint.device, routerIp: fingerprint.ip,
                         status: "pending", blocked: false, createdAt: serverTimestamp()
                     });
                     location.reload();
@@ -245,88 +250,78 @@
             }
         };
 
-        // عدادات النشر
+        // عدادات النشر والتحقق من الشروط
         document.getElementById('p-desc').oninput = function() {
-            const words = this.value.trim().split(/\s+/).filter(x => x).length;
-            document.getElementById('desc-counter').innerText = `الوصف: ${words}/20 كلمة`;
-            this.classList.toggle('input-error', words < 20);
+            const count = this.value.trim().split(/\s+/).filter(x => x).length;
+            document.getElementById('desc-counter').innerText = `الوصف: ${count}/20 كلمة`;
+            this.classList.toggle('text-error', count < 20);
         };
 
         document.getElementById('p-content').oninput = function() {
-            const words = this.value.trim().split(/\s+/).filter(x => x).length;
-            document.getElementById('content-counter').innerText = `المحتوى: ${words.toLocaleString()}/20,000 كلمة`;
-            this.classList.toggle('input-error', words > 20000);
+            const count = this.value.trim().split(/\s+/).filter(x => x).length;
+            document.getElementById('content-counter').innerText = `المحتوى: ${count.toLocaleString()}/20,000 كلمة`;
+            this.classList.toggle('text-error', count > 20000);
         };
 
         document.getElementById('submit-story-btn').onclick = async () => {
             const title = document.getElementById('p-title').value;
             const desc = document.getElementById('p-desc').value;
             const content = document.getElementById('p-content').value;
-            if(desc.trim().split(/\s+/).length < 20 || content.trim().split(/\s+/).length > 20000) {
-                return alert("يرجى الالتزام بحدود الكلمات (الوصف > 20، المحتوى < 20,000)");
-            }
+            if(desc.trim().split(/\s+/).length < 20) return alert("الوصف قصير جداً!");
+            if(content.trim().split(/\s+/).length > 20000) return alert("المحتوى تجاوز الحد المسموح!");
+
             await addDoc(collection(db, "stories"), {
                 title, desc, content, author: currentUserData.fullName,
                 authorId: auth.currentUser.uid, authorBirth: currentUserData.birthDate,
                 status: "pending", createdAt: serverTimestamp()
             });
-            alert("تم الإرسال للمراجعة!");
+            alert("تم الإرسال لعلي السيد بنجاح!");
             closeModal('publish-modal');
         };
 
-        // نظام تقليب الصفحات
-        function generateBookPages(story) {
+        // نظام تقليب الصفحات 3D
+        function initBook(story) {
             const words = story.content.split(/\s+/);
-            let pages = [];
+            bookPages = [];
             // صفحة 1: الغلاف الداخلي
-            pages.push(`
-                <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100%; text-align:center;">
-                    <h1 style="font-size:3rem; color:var(--corporate-blue);">${story.title}</h1>
-                    <h2 style="color:var(--gold); font-family:Cairo;">بقلم: ${story.author}</h2>
-                    <hr style="width:50%; border:1px solid #ddd;">
-                    <p style="font-style:italic; font-size:1.1rem; padding:20px;">${story.desc}</p>
-                    <p style="font-size:12px; color:#999;">تاريخ ميلاد الكاتب: ${story.authorBirth}</p>
+            bookPages.push(`
+                <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:100%; text-align:center; border:2px double var(--gold); padding:20px;">
+                    <h1 style="font-size:2.8rem; color:var(--corporate-blue); margin-bottom:10px;">${story.title}</h1>
+                    <h2 style="color:var(--gold);">بقلم: ${story.author}</h2>
+                    <hr style="width:60%; margin:20px 0;">
+                    <p style="font-style:italic; line-height:1.6;">${story.desc}</p>
+                    <p style="margin-top:30px; font-size:12px; color:gray;">تاريخ ميلاد الكاتب: ${story.authorBirth}</p>
                 </div>
             `);
-            // تقسيم النص 200 كلمة
+            // تقسيم النص (200 كلمة لكل صفحة)
             for (let i = 0; i < words.length; i += 200) {
-                pages.push(`<div class="page-text">${words.slice(i, i + 200).join(" ")}</div>`);
+                bookPages.push(`<div class="page-text">${words.slice(i, i + 200).join(" ")}</div>`);
             }
-            return pages;
+            renderPage(0);
         }
 
-        window.openBookReader = (story) => {
+        function renderPage(index) {
             const container = document.getElementById('book-pages-container');
-            container.innerHTML = "";
-            bookPages = generateBookPages(story);
-            currentPageIndex = 0;
+            container.innerHTML = `
+                <div class="book-page active">
+                    ${bookPages[index]}
+                    <div class="page-num">صفحة ${index + 1} من ${bookPages.length}</div>
+                </div>`;
+            currentPageIndex = index;
+        }
 
-            bookPages.forEach((html, i) => {
-                const p = document.createElement('div');
-                p.className = `book-page ${i === 0 ? 'active' : ''}`;
-                p.id = `bp-${i}`;
-                p.innerHTML = html + `<div class="page-num">الصفحة ${i + 1} من ${bookPages.length}</div>`;
-                container.appendChild(p);
-            });
-            openModal('reader-modal');
-        };
-
-        // دعم السحب (Swipe)
-        let touchStartX = 0;
-        document.getElementById('swipe-area').addEventListener('touchstart', e => touchStartX = e.touches[0].clientX);
+        // معالجة السحب (Swipe)
+        let startX = 0;
+        document.getElementById('swipe-area').addEventListener('touchstart', e => startX = e.touches[0].clientX);
         document.getElementById('swipe-area').addEventListener('touchend', e => {
-            const touchEndX = e.changedTouches[0].clientX;
-            if (touchStartX - touchEndX > 50) flipPage(1); // يسار -> تالي
-            if (touchEndX - touchStartX > 50) flipPage(-1); // يمين -> سابق
+            const endX = e.changedTouches[0].clientX;
+            if (startX - endX > 60) flip(1); // لليسار -> التالي
+            if (endX - startX > 60) flip(-1); // لليمين -> السابق
         });
 
-        function flipPage(dir) {
-            const nextIdx = currentPageIndex + dir;
-            if(nextIdx >= 0 && nextIdx < bookPages.length) {
-                document.getElementById(`bp-${currentPageIndex}`).classList.remove('active');
-                currentPageIndex = nextIdx;
-                document.getElementById(`bp-${currentPageIndex}`).classList.add('active');
-            }
+        function flip(dir) {
+            const next = currentPageIndex + dir;
+            if(next >= 0 && next < bookPages.length) renderPage(next);
         }
 
         async function loadLibrary() {
@@ -339,7 +334,7 @@
                 const item = document.createElement('div');
                 item.className = 'book-item';
                 item.innerHTML = `<div class="book-card"><h3>${s.title}</h3></div>`;
-                item.onclick = () => openBookReader(s);
+                item.onclick = () => { initBook(s); openModal('reader-modal'); };
                 grid.appendChild(item);
             });
         }
@@ -357,11 +352,12 @@
         document.getElementById('publishBtn').onclick = () => {
             if(!auth.currentUser) return openModal('auth-modal');
             if(currentUserData.status === 'active') openModal('publish-modal');
-            else alert("حسابك قيد المراجعة حالياً.");
+            else alert("حسابك قيد المراجعة حالياً من قبل الإدارة.");
         };
 
         loadLibrary();
-        getSecIdentity().then(s => console.log("Security Active: Network Guard Logged."));
+        // حفظ البصمة تلقائياً عند الدخول (بدون حظر إذا لم يكن هناك مخالفة)
+        getFingerprint().then(f => console.log("Secure Session Started:", f.device));
     </script>
 </body>
 </html>
