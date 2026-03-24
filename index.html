@@ -16,7 +16,7 @@
             --shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
 
-        body { font-family: 'Cairo', sans-serif; background: #eceff1; margin: 0; padding: 0; color: #1e272e; overflow: hidden; }
+        body { font-family: 'Cairo', sans-serif; background: #eceff1; margin: 0; padding: 0; color: #1e272e; overflow-x: hidden; }
 
         /* شاشة الحظر */
         #ban-screen { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 10000; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
@@ -27,38 +27,39 @@
 
         #userBar { background: #1e272e; color: white; padding: 12px 25px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; }
         
-        .library-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 30px; max-width: 1200px; margin: 30px auto; padding: 20px; height: 70vh; overflow-y: auto; }
+        .library-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 30px; max-width: 1200px; margin: 30px auto; padding: 20px; }
 
-        /* تصميم الكتاب من الخارج */
+        /* تصميم الكتاب الخارجي */
         .book-item { perspective: 1000px; cursor: pointer; }
         .book-card {
             width: 160px; height: 240px; background: var(--corporate-blue); border-radius: 3px 15px 15px 3px; position: relative;
             transform-style: preserve-3d; transition: 0.6s; box-shadow: 8px 8px 25px rgba(0,0,0,0.4);
             display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 15px; color: white;
-            border-left: 10px solid rgba(0,0,0,0.3);
+            border-left: 10px solid rgba(0,0,0,0.3); text-align: center;
         }
-        .book-card h3 { font-family: 'Amiri', serif; font-size: 1.2rem; text-align: center; margin: 0; z-index: 2; }
+        .book-card h3 { font-family: 'Amiri', serif; font-size: 1.2rem; margin: 0; pointer-events: none; }
 
         /* المودالات */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 2000; overflow-y: auto; }
         .form-container { background: white; max-width: 500px; margin: 50px auto; padding: 30px; border-radius: 15px; border-top: 8px solid var(--corporate-blue); }
         
         input, textarea { width: 100%; padding: 12px; margin-bottom: 12px; border: 2px solid #ddd; border-radius: 8px; font-family: 'Cairo'; box-sizing: border-box; }
-        .limit-exceeded { border-color: var(--error) !important; color: var(--error); }
+        .limit-error { border-color: var(--error) !important; color: var(--error); }
         
         .btn-action { background: var(--corporate-gradient); color: white; border: none; padding: 14px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; margin-bottom: 10px; }
         .google-btn { background: white; color: #444; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-        /* القارئ الاحترافي */
+        /* القارئ الاحترافي (الكتاب الحقيقي) */
         .reader-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 3000; display: none; align-items: center; justify-content: center; }
-        .book-viewport { width: 90%; max-width: 450px; height: 80vh; background: var(--paper); box-shadow: 0 0 50px #000; position: relative; overflow: hidden; border-radius: 4px; }
+        .book-viewport { width: 90%; max-width: 450px; height: 80vh; background: var(--paper); box-shadow: 0 0 50px #000; position: relative; overflow: hidden; border-radius: 5px; }
         
         .page { width: 100%; height: 100%; padding: 40px; box-sizing: border-box; display: none; flex-direction: column; }
-        .page.active { display: flex; animation: pageFlip 0.5s ease; }
-        @keyframes pageFlip { from { transform: rotateY(-20deg); opacity: 0.5; } to { transform: rotateY(0); opacity: 1; } }
+        .page.active { display: flex; animation: pageFlip 0.6s ease; }
+        @keyframes pageFlip { from { transform: rotateY(-30deg); opacity: 0; } to { transform: rotateY(0); opacity: 1; } }
 
-        .inner-cover { text-align: center; border: 2px double var(--gold); padding: 20px; height: 100%; display: flex; flex-direction: column; justify-content: center; }
-        .page-text { font-family: 'Amiri', serif; font-size: 1.4rem; line-height: 1.8; text-align: justify; white-space: pre-wrap; flex-grow: 1; color: #2c3e50; }
+        .inner-cover { text-align: center; border: 3px double var(--gold); padding: 20px; height: 100%; display: flex; flex-direction: column; justify-content: center; }
+        .page-text { font-family: 'Amiri', serif; font-size: 1.4rem; line-height: 1.8; text-align: justify; white-space: pre-wrap; flex-grow: 1; }
+        .page-footer { text-align: center; font-size: 12px; border-top: 1px solid #ddd; padding-top: 10px; color: #777; }
 
         .publish-fixed { position: fixed; bottom: 30px; left: 30px; background: var(--corporate-gradient); color: white; border: none; padding: 15px 30px; border-radius: 50px; cursor: pointer; font-weight: bold; z-index: 100; box-shadow: var(--shadow); }
         #logoutBtn { background: var(--error); color: white; border: none; padding: 5px 12px; border-radius: 5px; cursor: pointer; }
@@ -68,16 +69,17 @@
 
     <div id="ban-screen">
         <div class="ban-box">
-            <h1 style="color:var(--error)">⚠️ تم حظر الحساب نهائياً</h1>
-            <p id="ban-detail">تم رصد نشاط مشبوه (تعدد حسابات على نفس الشبكة أو الجهاز).</p>
+            <h1 style="color:var(--error)">⚠️ تم حظر حسابك نهائياً</h1>
+            <p id="ban-reason-text">تم رصد نشاط مخالف لسياسات المنصة (تعدد حسابات على نفس الجهاز أو الشبكة).</p>
+            <p>يرجى التواصل مع الإدارة إذا كان هذا الحظر عن طريق الخطأ.</p>
         </div>
     </div>
 
-    <div id="userBar"><span>جاري فحص الحماية...</span></div>
+    <div id="userBar"><span>جاري التحقق من أمن الشبكة...</span></div>
 
     <header>
         <h1>متاهة السطور</h1>
-        <p>بإدارة علي السيد | الحماية النشطة</p>
+        <p>بإدارة علي السيد | المنصة الرسمية للكُتّاب</p>
     </header>
 
     <div class="library-grid" id="library"></div>
@@ -87,55 +89,54 @@
     <div id="auth-modal" class="modal">
         <div class="form-container">
             <h2 id="auth-title" style="text-align:center;">دخول الكُتّاب</h2>
-            <div id="auth-forms">
-                <div id="reg-fields">
-                    <input type="text" id="r-fullname" placeholder="الاسم الثلاثي">
-                    <input type="text" id="r-username" placeholder="اسم المستخدم (أرقام وحروف صغيرة)">
-                    <input type="email" id="r-email" placeholder="البريد الإلكتروني">
-                    <input type="password" id="r-pass" placeholder="كلمة المرور">
-                    <input type="date" id="r-birth">
-                </div>
-                <div id="log-fields" style="display:none;">
-                    <input type="email" id="l-email" placeholder="البريد الإلكتروني">
-                    <input type="password" id="l-pass" placeholder="كلمة المرور">
-                </div>
-                <button class="btn-action" id="main-auth-btn">تأكيد</button>
-                <button class="btn-action google-btn" id="google-auth-btn">
-                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/action/google.svg" width="18"> الدخول عبر Google
-                </button>
-                <p id="toggle-auth" style="text-align:center; cursor:pointer; color:blue;">ليس لديك حساب؟ سجل الآن</p>
-                <p onclick="closeModal('auth-modal')" style="text-align:center; color:red; cursor:pointer;">إلغاء</p>
+            <div id="reg-fields">
+                <input type="text" id="r-fullname" placeholder="الاسم الثلاثي">
+                <input type="text" id="r-username" placeholder="اسم المستخدم (حروف صغيرة وأرقام)">
+                <input type="email" id="r-email" placeholder="البريد الإلكتروني">
+                <input type="password" id="r-pass" placeholder="كلمة المرور">
+                <input type="date" id="r-birth">
             </div>
+            <div id="log-fields" style="display:none;">
+                <input type="email" id="l-email" placeholder="البريد الإلكتروني">
+                <input type="password" id="l-pass" placeholder="كلمة المرور">
+            </div>
+            <button class="btn-action" id="main-auth-btn">تأكيد البيانات</button>
+            <button class="btn-action google-btn" id="google-auth-btn">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/action/google.svg" width="18"> الدخول عبر Google
+            </button>
+            <p id="toggle-auth" style="text-align:center; cursor:pointer; color:blue;">ليس لديك حساب؟ سجل الآن</p>
+            <p onclick="closeModal('auth-modal')" style="text-align:center; color:red; cursor:pointer;">إلغاء</p>
         </div>
     </div>
 
-    <div id="google-data-modal" class="modal">
+    <div id="google-complete-modal" class="modal">
         <div class="form-container">
-            <h3>إكمال ملفك الشخصي</h3>
+            <h3>إكمال بيانات الحساب</h3>
             <p style="font-size:12px; color:gray;">يرجى تزويدنا بالبيانات التالية لربط بصمة الحماية.</p>
-            <input type="text" id="g-username" placeholder="اسم المستخدم الجديد">
-            <input type="password" id="g-pass" placeholder="كلمة مرور للحساب">
+            <input type="text" id="g-username" placeholder="اسم المستخدم">
+            <input type="password" id="g-pass" placeholder="كلمة المرور">
             <input type="date" id="g-birth">
-            <button class="btn-action" id="complete-google-btn">حفظ وطلب مراجعة</button>
+            <button class="btn-action" id="complete-google-btn">حفظ وإرسال للمراجعة</button>
         </div>
     </div>
 
     <div id="publish-modal" class="modal">
         <div class="form-container" style="max-width: 600px;">
-            <h2>نشر عمل أدبي</h2>
+            <h2>نشر عمل أدبي جديد</h2>
             <input type="text" id="p-title" placeholder="عنوان الكتاب">
-            <p id="desc-info" style="font-size:11px;">الوصف: 0 / 20 كلمة</p>
-            <textarea id="p-desc" placeholder="وصف الكتاب..." rows="2"></textarea>
-            <p id="content-info" style="font-size:11px;">المحتوى: 0 / 20,000 كلمة</p>
-            <textarea id="p-content" placeholder="اكتب النص هنا..." rows="10"></textarea>
-            <button class="btn-action" id="submit-story-btn">إرسال لعلي السيد</button>
-            <p onclick="closeModal('publish-modal')" style="text-align:center; cursor:pointer;">إغلاق</p>
+            <div id="desc-counter" style="font-size:11px; margin-bottom:5px;">الوصف: 0 / 20 كلمة</div>
+            <textarea id="p-desc" placeholder="وصف الكتاب (ما هو محتوى روايتك؟)" rows="2"></textarea>
+            <div id="content-counter" style="font-size:11px; margin-bottom:5px;">المحتوى: 0 / 20,000 كلمة</div>
+            <textarea id="p-content" placeholder="اكتب نص الكتاب هنا..." rows="12"></textarea>
+            <button class="btn-action" id="submit-story-btn">إرسال للمراجعة</button>
+            <p onclick="closeModal('publish-modal')" style="text-align:center; cursor:pointer; color:gray;">إغلاق</p>
         </div>
     </div>
 
     <div id="reader-modal" class="reader-container">
-        <div class="book-viewport" id="pages-view"></div>
-        <button onclick="closeModal('reader-modal')" style="position:fixed; top:20px; right:20px; color:white; background:red; border:none; padding:10px 20px; cursor:pointer; border-radius:5px;">إغلاق الكتاب</button>
+        <div class="book-viewport" id="book-pages"></div>
+        <div style="position:fixed; bottom:20px; color:white; font-size:12px; text-align:center; width:100%;">اسحب لليمين أو اليسار لقلب الصفحة</div>
+        <button onclick="closeModal('reader-modal')" style="position:fixed; top:20px; right:20px; background:red; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer;">إغلاق الكتاب</button>
     </div>
 
     <script type="module">
@@ -162,26 +163,56 @@
         let bookPages = [];
         let currentPageIndex = 0;
 
-        // --- نظام البصمة المزدوجة ---
+        // --- نظام البصمة الأمنية ---
         const getSignatures = async () => {
             const res = await fetch('https://api.ipify.org?format=json');
             const data = await res.json();
-            let dId = localStorage.getItem('maze_secure_fingerprint');
+            let dId = localStorage.getItem('maze_secure_id');
             if(!dId) {
-                dId = 'MAZE_ID_' + Math.random().toString(36).substr(2, 9);
-                localStorage.setItem('maze_secure_fingerprint', dId);
+                dId = 'DEVICE_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('maze_secure_id', dId);
             }
-            return { ip: data.ip, device: dId };
+            return { routerIp: data.ip, deviceId: dId };
         };
 
-        const executeBan = async (uid, reason) => {
+        const banAccount = async (uid, reason) => {
             await updateDoc(doc(db, "users", uid), {
                 status: "banned",
                 blocked: true,
-                banReason: reason,
+                banNote: reason,
                 blacklisted: true
             });
-            document.getElementById('ban-screen').style.display = 'flex';
+            // هنا يمكنك استدعاء API خارجي لإرسال إيميل
+            console.log("Ban Email Sent to: " + uid);
+        };
+
+        const checkFraud = async (uid) => {
+            const sig = await getSignatures();
+            const qDevice = query(collection(db, "users"), where("deviceId", "==", sig.deviceId));
+            const qRouter = query(collection(db, "users"), where("routerIp", "==", sig.routerIp));
+            
+            const [dSnap, rSnap] = await Promise.all([getDocs(qDevice), getDocs(qRouter)]);
+            
+            let found = false;
+            const processBan = (snap) => {
+                snap.forEach(d => {
+                    if(d.id !== uid) {
+                        banAccount(d.id, "تعدد حسابات على نفس البصمة");
+                        found = true;
+                    }
+                });
+            };
+
+            processBan(dSnap);
+            processBan(rSnap);
+
+            if(found) {
+                await banAccount(uid, "محاولة إنشاء/دخول حساب على بصمة محظورة أو نشطة");
+                document.getElementById('ban-screen').style.display = 'flex';
+                signOut(auth);
+                return true;
+            }
+            return false;
         };
 
         // --- إدارة الجلسة ---
@@ -200,139 +231,119 @@
                     }
                     bar.innerHTML = `<span>الكاتب: ${currentUserData.fullName}</span> <button id="logoutBtn" onclick="handleLogout()">خروج</button>`;
                 } else {
-                    openModal('google-data-modal');
+                    openModal('google-complete-modal');
                 }
             } else {
-                bar.innerHTML = `<span>زائر</span> <button onclick="openModal('auth-modal')" style="background:green; color:white; border:none; border-radius:5px; padding:4px 10px; cursor:pointer;">دخول</button>`;
+                bar.innerHTML = `<span>زائر (يرجى تسجيل الدخول للنشر)</span> <button onclick="openModal('auth-modal')" style="background:green; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">دخول</button>`;
             }
             loadLibrary();
         });
 
-        // --- الأمان عند التسجيل/الدخول ---
-        const checkSecurity = async (uid) => {
-            const sig = await getSignatures();
-            const q1 = query(collection(db, "users"), where("deviceId", "==", sig.device));
-            const q2 = query(collection(db, "users"), where("routerIp", "==", sig.ip));
-            const [dSnap, rSnap] = await Promise.all([getDocs(q1), getDocs(q2)]);
-
-            let suspects = [];
-            dSnap.forEach(d => { if(d.id !== uid) suspects.push(d.id) });
-            rSnap.forEach(d => { if(d.id !== uid) suspects.push(d.id) });
-
-            if(suspects.length > 0) {
-                suspects.forEach(sid => executeBan(sid, "تعدد حسابات مكتشف"));
-                executeBan(uid, "محاولة إنشاء حساب على بصمة مسجلة");
-                return false;
-            }
-            return true;
-        };
-
+        // --- العمليات الأمنية عند الدخول ---
         document.getElementById('main-auth-btn').onclick = async () => {
+            const sig = await getSignatures();
             const email = isLogin ? document.getElementById('l-email').value : document.getElementById('r-email').value;
             const pass = isLogin ? document.getElementById('l-pass').value : document.getElementById('r-pass').value;
 
             try {
                 if(isLogin) {
                     const cred = await signInWithEmailAndPassword(auth, email, pass);
-                    const safe = await checkSecurity(cred.user.uid);
-                    if(safe) location.reload();
+                    const isFraud = await checkFraud(cred.user.uid);
+                    if(!isFraud) location.reload();
                 } else {
                     const name = document.getElementById('r-fullname').value;
                     const user = document.getElementById('r-username').value;
                     const birth = document.getElementById('r-birth').value;
-                    const sig = await getSignatures();
                     
                     const cred = await createUserWithEmailAndPassword(auth, email, pass);
-                    const safe = await checkSecurity(cred.user.uid);
-                    if(safe) {
+                    const isFraud = await checkFraud(cred.user.uid);
+                    if(!isFraud) {
                         await setDoc(doc(db, "users", cred.user.uid), {
                             fullName: name, username: user, email, birthDate: birth,
-                            deviceId: sig.device, routerIp: sig.ip, status: "pending", blocked: false
+                            deviceId: sig.deviceId, routerIp: sig.routerIp, status: "pending", blocked: false
                         });
                         location.reload();
                     }
                 }
-            } catch(e) { alert("فشل العملية: " + e.message); }
+            } catch(e) { alert("خطأ: " + e.message); }
         };
 
         document.getElementById('google-auth-btn').onclick = async () => {
             try {
                 const result = await signInWithPopup(auth, provider);
-                const safe = await checkSecurity(result.user.uid);
-                if(!safe) return;
+                const isFraud = await checkFraud(result.user.uid);
+                if(isFraud) return;
                 const snap = await getDoc(doc(db, "users", result.user.uid));
                 if(snap.exists()) location.reload();
-                else openModal('google-data-modal');
+                else openModal('google-complete-modal');
             } catch(e) { alert(e.message); }
         };
 
         document.getElementById('complete-google-btn').onclick = async () => {
+            const sig = await getSignatures();
             const user = document.getElementById('g-username').value;
             const pass = document.getElementById('g-pass').value;
             const birth = document.getElementById('g-birth').value;
-            const sig = await getSignatures();
 
             await setDoc(doc(db, "users", auth.currentUser.uid), {
                 fullName: auth.currentUser.displayName, username: user, email: auth.currentUser.email,
-                birthDate: birth, deviceId: sig.device, routerIp: sig.ip, status: "pending", blocked: false
+                birthDate: birth, deviceId: sig.deviceId, routerIp: sig.routerIp, status: "pending", blocked: false
             });
             location.reload();
         };
 
-        // --- عدادات الكلمات ---
+        // --- نظام العدادات ---
         document.getElementById('p-desc').oninput = function() {
-            const count = this.value.trim().split(/\s+/).filter(x => x).length;
-            document.getElementById('desc-info').innerText = `الوصف: ${count} / 20 كلمة`;
-            this.classList.toggle('limit-exceeded', count > 20);
+            const words = this.value.trim().split(/\s+/).filter(x => x).length;
+            document.getElementById('desc-counter').innerText = `الوصف: ${words} / 20 كلمة`;
+            this.classList.toggle('limit-error', words > 20);
         };
         document.getElementById('p-content').oninput = function() {
-            const count = this.value.trim().split(/\s+/).filter(x => x).length;
-            document.getElementById('content-info').innerText = `المحتوى: ${count.toLocaleString()} / 20,000 كلمة`;
-            this.classList.toggle('limit-exceeded', count > 20000);
+            const words = this.value.trim().split(/\s+/).filter(x => x).length;
+            document.getElementById('content-counter').innerText = `المحتوى: ${words.toLocaleString()} / 20,000 كلمة`;
+            this.classList.toggle('limit-error', words > 20000);
         };
 
         document.getElementById('submit-story-btn').onclick = async () => {
             const title = document.getElementById('p-title').value;
             const desc = document.getElementById('p-desc').value;
             const content = document.getElementById('p-content').value;
-            if(desc.split(/\s+/).length > 20 || content.split(/\s+/).length > 20000) return alert("تخطيت الحد المسموح!");
+
+            if(desc.split(/\s+/).length > 20 || content.split(/\s+/).length > 20000) return alert("تجاوزت الحد المسموح به!");
 
             await addDoc(collection(db, "stories"), {
                 title, desc, content, author: currentUserData.fullName,
                 authorId: auth.currentUser.uid, authorBirth: currentUserData.birthDate,
                 status: "pending", createdAt: serverTimestamp()
             });
-            alert("تم الإرسال للمراجعة بنجاح.");
+            alert("تم الإرسال! سيتم النشر بعد مراجعة علي السيد.");
             closeModal('publish-modal');
         };
 
-        // --- نظام الكتاب الحقيقي ---
+        // --- نظام القراءة والتقليب ---
         function openBook(story) {
             bookPages = [];
             currentPageIndex = 0;
-            const view = document.getElementById('pages-view');
 
-            // صفحة الغلاف
+            // 1. صفحة الغلاف الداخلي
             bookPages.push(`
                 <div class="page active">
                     <div class="inner-cover">
-                        <h1 style="font-family:'Amiri'; color:var(--corporate-blue);">${story.title}</h1>
-                        <p>تأليف الكاتب: <strong>${story.author}</strong></p>
-                        <div style="margin:20px 0; padding:15px; border:1px solid #ddd; background:#fff;">
-                            <small>عن الكتاب:</small><br>${story.desc}
-                        </div>
-                        <p style="font-size:12px; color:gray;">مواليد الكاتب: ${story.authorBirth}</p>
+                        <h1 style="color:var(--corporate-blue);">${story.title}</h1>
+                        <h3>تأليف: ${story.author}</h3>
+                        <p style="margin:20px 0; font-style:italic; border-bottom:1px solid #ddd; padding-bottom:10px;">${story.desc}</p>
+                        <p style="font-size:12px; color:gray;">تاريخ ميلاد الكاتب: ${story.authorBirth}</p>
                     </div>
                 </div>`);
 
-            // تقسيم الصفحات
+            // 2. تقسيم النص لصفحات (200 كلمة لكل صفحة)
             const words = story.content.split(/\s+/);
-            for(let i=0; i<words.length; i+=200) {
+            for(let i=0; i < words.length; i+=200) {
                 const chunk = words.slice(i, i+200).join(" ");
                 bookPages.push(`
                     <div class="page">
                         <div class="page-text">${chunk}</div>
-                        <div style="text-align:center; font-size:12px; border-top:1px solid #eee;">صفحة ${Math.floor(i/200)+1}</div>
+                        <div class="page-footer">صفحة ${Math.floor(i/200) + 1}</div>
                     </div>`);
             }
             renderPage();
@@ -340,18 +351,18 @@
         }
 
         function renderPage() {
-            const view = document.getElementById('pages-view');
-            view.innerHTML = bookPages[currentPageIndex];
-            view.querySelector('.page').classList.add('active');
+            const container = document.getElementById('book-pages');
+            container.innerHTML = bookPages[currentPageIndex];
+            container.querySelector('.page').classList.add('active');
         }
 
-        // تحكم السحب (Swipe)
+        // دعم السحب (Touch Swipe)
         let touchStart = 0;
-        document.getElementById('pages-view').ontouchstart = e => touchStart = e.touches[0].clientX;
-        document.getElementById('pages-view').ontouchend = e => {
+        document.getElementById('book-pages').ontouchstart = e => touchStart = e.touches[0].clientX;
+        document.getElementById('book-pages').ontouchend = e => {
             const touchEnd = e.changedTouches[0].clientX;
-            if(touchStart - touchEnd > 50 && currentPageIndex < bookPages.length - 1) { currentPageIndex++; renderPage(); }
-            if(touchStart - touchEnd < -50 && currentPageIndex > 0) { currentPageIndex--; renderPage(); }
+            if(touchStart - touchEnd > 50 && currentPageIndex < bookPages.length - 1) { currentPageIndex++; renderPage(); } // سحب يسار = صفحة تالية
+            if(touchStart - touchEnd < -50 && currentPageIndex > 0) { currentPageIndex--; renderPage(); } // سحب يمين = صفحة سابقة
         };
 
         async function loadLibrary() {
@@ -360,8 +371,9 @@
             const snap = await getDocs(q);
             grid.innerHTML = "";
             
-            for(const d of snap.docs) {
-                const s = d.data();
+            for(const docRef of snap.docs) {
+                const s = docRef.data();
+                // فحص إذا كان صاحب الكتاب محظوراً
                 const authSnap = await getDoc(doc(db, "users", s.authorId));
                 if(authSnap.exists() && authSnap.data().blocked) continue;
 
@@ -381,16 +393,15 @@
             document.getElementById('log-fields').style.display = isLogin ? 'block' : 'none';
             document.getElementById('reg-fields').style.display = isLogin ? 'none' : 'block';
             document.getElementById('auth-title').innerText = isLogin ? 'دخول الكُتّاب' : 'إنشاء حساب جديد';
-            document.getElementById('toggle-auth').innerText = isLogin ? 'ليس لديك حساب؟ سجل' : 'لديك حساب؟ سجل دخول';
         };
 
         document.getElementById('publishBtn').onclick = () => {
-            if(!auth.currentUser) openModal('auth-modal');
-            else if(currentUserData && currentUserData.status === 'active') openModal('publish-modal');
+            if(!auth.currentUser) return openModal('auth-modal');
+            if(currentUserData && currentUserData.status === 'active') openModal('publish-modal');
             else alert("حسابك قيد المراجعة حالياً.");
         };
 
-        getSignatures();
+        getSignatures(); // سحب البصمة سراً فور فتح الموقع
     </script>
 </body>
 </html>
